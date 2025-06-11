@@ -4,7 +4,7 @@ import Sidebar from './Sidebar'
 import TopNavbar from './TopNavbar'
 import DashboardContent from './DashboardContent'
 import ClientManagement from './ClientManagement'
-import './Dashboard.css'
+import './dashboard.css'
 
 function Dashboard() {
   const { userData } = useAuth()
