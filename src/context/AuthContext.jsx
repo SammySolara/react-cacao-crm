@@ -119,16 +119,20 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) {
-        setUser(session.user)
-        fetchUserData(session.user.email).then(data => {
-          setUserData(data)
-          setLoading(false)
-        })
-      } else {
-        setLoading(false)
-      }
-    })
+  if (session) {
+    setUser(session.user)
+    fetchUserData(session.user.email)
+      .then(data => {
+        setUserData(data)
+      })
+      .catch(err => {
+        console.error('Error fetching user data:', err)
+      })
+      .finally(() => setLoading(false))  // <-- Important!
+  } else {
+    setLoading(false)
+  }
+})
 
     // Listen for auth changes
     const {
